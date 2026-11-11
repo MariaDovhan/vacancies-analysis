@@ -1,0 +1,24 @@
+@startuml c4-container-diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title C4 Model — Level 2: Container Diagram (Vacancies Analysis System)
+
+Person(user, "User", "Browses vacancy listings and market analytics.")
+
+System_Boundary(system, "Vacancies Analysis System") {
+    Container(frontend, "Frontend", "React, Vite, TypeScript", "Single-Page Application served in the browser; displays listings and analytics.")
+    Container(backend, "Backend (Modular Monolith)", "Node.js, NestJS, TypeScript", "Modular monolith organizing market, analytics, ingestion, scheduled-jobs, and prisma modules.")
+    ContainerDb(db, "Database", "PostgreSQL", "Stores normalized vacancy data and analytics metrics.")
+}
+
+System_Ext(djinni, "Djinni RSS Feed", "External RSS feed at djinni.co/jobs/rss/")
+System_Ext(jobico, "Jobico XML Feed", "External XML feed at jobico.io/api/feeds/jobs.xml")
+
+Rel(user, frontend, "Uses UI", "HTTPS")
+Rel(frontend, backend, "Makes API calls", "HTTP / JSON")
+Rel(backend, db, "Reads/writes", "Prisma / SQL")
+Rel(backend, djinni, "Fetches job feed", "HTTPS / RSS XML")
+Rel(backend, jobico, "Fetches job feed", "HTTPS / XML")
+@enduml

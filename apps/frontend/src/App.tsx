@@ -1,17 +1,21 @@
-import React from 'react';
-import { SHARED_APP_NAME } from '@vacancies-analysis/shared';
+import { useState } from 'react';
 import './App.css';
 
-export const App: React.FC = () => {
+export function App() {
+  const [count, setCount] = useState(0);
+
   return (
-    <main>
-      <h1>Vacancies Analysis Dashboard</h1>
-      <p>Ласкаво просимо до аналізу ринку вакансій: {SHARED_APP_NAME}</p>
+    <>
+      <h1>Vite + React</h1>
       <div className="card">
-        <p>Frontend запущено успішно.</p>
+        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
       </div>
-    </main>
+      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+    </>
   );
-};
+}
 
 export default App;
