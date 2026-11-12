@@ -15,7 +15,8 @@ describe('Frontend Smoke Test', () => {
       root.render(<App />);
     });
 
-    expect(container.innerHTML).toContain('Vite + React');
+    expect(container.innerHTML).toContain('Vacancies Analysis');
+    expect(container.innerHTML).toContain('Frontend is running.');
 
     await act(async () => {
       root.unmount();
